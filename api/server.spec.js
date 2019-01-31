@@ -19,12 +19,21 @@ describe("server.js", () => {
       expect(response.body).toEqual({ hello: "Teruki Hanazawa" });
       expect(response.status).toBe(201);
     });
+
+    it("should create a character", async () => {
+      const body = { firstName: "Minori", lastName: "Asagiri" };
+      let response = await request(server)
+        .post("/characters")
+        .send(body);
+      expect(response.body).toEqual([11]);
+      expect(response.status).toBe(201);
+    });
   });
 
   describe("DELETE /characters/:id endpoint", () => {
     it("should remove the character", async () => {
       let response = await request(server).delete("/characters/:1");
-      expect(response.status).toBe(201);
+      expect(response.status).toBe(200);
     });
   });
 });
